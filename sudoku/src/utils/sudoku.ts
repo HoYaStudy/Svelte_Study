@@ -1,9 +1,10 @@
+import type { DIFFICULTY } from './type';
+
 import { multiply } from 'mathjs';
 import _ from 'lodash';
 
 type DIRECTION = 'row' | 'col';
 type ANGLE = 0 | 90 | 180 | 270;
-type DIFFICULTY = 'easy' | 'medium' | 'hard';
 
 export function getSolution(): number[][] {
 	const s = _.chunk(_.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]), 3);
@@ -36,14 +37,14 @@ export function getSolution(): number[][] {
 		[...sx2[1], ...x1sx2[1], ...x2sx2[1]],
 		[...sx2[2], ...x1sx2[2], ...x2sx2[2]]
 	];
-	solution = swapCell(solution, 'row', ..._.take(_.shuffle([0, 1, 2]), 2));
-	solution = swapCell(solution, 'row', ..._.take(_.shuffle([3, 4, 5]), 2));
-	solution = swapCell(solution, 'row', ..._.take(_.shuffle([6, 7, 8]), 2));
-	solution = swapCell(solution, 'col', ..._.take(_.shuffle([0, 1, 2]), 2));
-	solution = swapCell(solution, 'col', ..._.take(_.shuffle([3, 4, 5]), 2));
-	solution = swapCell(solution, 'col', ..._.take(_.shuffle([6, 7, 8]), 2));
-	solution = swapBox(solution, 'row', ..._.take(_.shuffle([0, 1, 2]), 2));
-	solution = swapBox(solution, 'col', ..._.take(_.shuffle([0, 1, 2]), 2));
+	solution = swapCell(solution, 'row', ...(_.take(_.shuffle([0, 1, 2]), 2) as [number, number]));
+	solution = swapCell(solution, 'row', ...(_.take(_.shuffle([3, 4, 5]), 2) as [number, number]));
+	solution = swapCell(solution, 'row', ...(_.take(_.shuffle([6, 7, 8]), 2) as [number, number]));
+	solution = swapCell(solution, 'col', ...(_.take(_.shuffle([0, 1, 2]), 2) as [number, number]));
+	solution = swapCell(solution, 'col', ...(_.take(_.shuffle([3, 4, 5]), 2) as [number, number]));
+	solution = swapCell(solution, 'col', ...(_.take(_.shuffle([6, 7, 8]), 2) as [number, number]));
+	solution = swapBox(solution, 'row', ...(_.take(_.shuffle([0, 1, 2]), 2) as [number, number]));
+	solution = swapBox(solution, 'col', ...(_.take(_.shuffle([0, 1, 2]), 2) as [number, number]));
 	solution = rotation(solution, _.shuffle([0, 90, 180, 270] as const)[0]);
 	return solution;
 }
